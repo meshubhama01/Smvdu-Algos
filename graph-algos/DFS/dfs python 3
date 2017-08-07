@@ -1,0 +1,15 @@
+def DFS_dist_from_node(query_node, parents):
+    """Return dictionary containing distances of parent GO nodes from the query"""
+    result = {}
+    stack = []
+    stack.append( (query_node, 0) )
+    while len(stack) > 0:
+        print("stack=", stack)
+        node, dist = stack.pop()
+        result[node] = dist
+        if node in parents:
+            for parent in parents[node]:
+                stack_members = [x[0] for x in stack]
+                if parent not in stack_members:
+                    stack.append( (parent, dist+1) )
+    return result
